@@ -7,10 +7,12 @@ Cleaning the search results.
 Extracting relevant details via the Groq API using a machine learning model.
 The application provides options to either upload a CSV file or link a Google Spreadsheet as the input data source. It also includes robust error handling, including retries for failed API calls, and notifies the user about errors during processing.
 
+## Loom Video Link:
+https://drive.google.com/file/d/1Gq-zAl0UVdiGtg63lr4DxcC0Z5dvXr9i/view?usp=sharing
 ## Project Structure
 
 - **app.py**: The main file to run the Streamlit app, allowing users to upload CSVs or link a Google Sheet. It interacts with the Google Sheets API to read/write data.
-- **agent.py**: Implements the `TaskManager` class which handles task execution with retries and logging.
+- **agent.py**: Implements the `TaskManager` class which handles task execution with retries and logging retries any failure like api call failure for three times with delay of 5 secs.
 - **fetch_data.py**: Fetches search results from Google Search using the SerpAPI.
 - **clean_data.py**: Cleans the raw search results JSON to remove unnecessary data.
 - **extract_info_mo.py**: Extracts specific information using the Groq API.
@@ -28,16 +30,16 @@ The application provides options to either upload a CSV file or link a Google Sp
     
     pip install -r requirements.txt
 
-### 3. Setup serpapi and grooq api key .
-   -create a .env file in this format
-   -google_api_key = "#your serpapi key"
-   -groq_api_key = "#your groq api key"
+### 3. Setup serpapi and grooq api key through registering on their websites .
+   - create a .env file in this format
+   - google_api_key = "#your serpapi key"
+   - groq_api_key = "#your groq api key"
 
 
 ### 4. Create a Project in [Google Cloud Console](https://console.cloud.google.com/)
 
 - Enable the Google Sheets API.
-- Set up the OAuth consent screen.
+- Set up the OAuth consent screen with external users.
 - Create OAuth 2.0 credentials and download the `credentials.json` file.
 - Place the `credentials.json` file in the root directory of the project.
 
