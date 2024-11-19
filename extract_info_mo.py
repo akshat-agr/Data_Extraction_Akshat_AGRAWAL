@@ -2,7 +2,7 @@ import os
 import json
 from groq import Groq
 
-def extract_info(info_type, api_key, input_file="cleaned_results.json"):
+def extract_info(entity, info_type, api_key, input_file="cleaned_results.json"):
     with open(input_file, "r") as infile:
         data = infile.read()
 
@@ -11,9 +11,11 @@ def extract_info(info_type, api_key, input_file="cleaned_results.json"):
         messages=[
             {
                 "role": "user",
-                "content": f"""Extract the following information:
-                    -{info_type}
-                    -give only extracted data value no other text or prompt along with it in any form not even this type
+                "content": f"""Extract the following information for the entity '{entity}':
+                    - {info_type}
+                    - Provide only the extracted data value, no other text or prompts.
+                    - Do not include any sentences like "here is the data"; just return the extracted value.
+                    here is the the data to refer:
                     {data}"""
             }
         ],
@@ -22,6 +24,7 @@ def extract_info(info_type, api_key, input_file="cleaned_results.json"):
     return chat_completion.choices[0].message.content
 
 if __name__ == "__main__":
-    info_type = input()
-    api_key = input()
-    print(extract_info(info_type, api_key))
+    entity = input("Enter entity: ")
+    info_type = input("Enter info type: ")
+    api_key = input("Enter API key: ")
+    print(extract_info(entity, info_type, api_key))
