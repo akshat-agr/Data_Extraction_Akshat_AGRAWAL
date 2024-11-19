@@ -98,7 +98,7 @@ def main():
                         try:
                             task_manager.execute_task(fetch_search_results, entity, info, google_api_key)
                             task_manager.execute_task(clean_json_data, "search_results.json", "cleaned_results.json")
-                            extracted_data = task_manager.execute_task(extract_info, info, groq_api_key)
+                            extracted_data = task_manager.execute_task(extract_info, entity, info, groq_api_key)
 
                             trimmed_data = extracted_data.split(":", 1)[-1].strip()
                             df.at[index, info] = trimmed_data
